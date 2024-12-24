@@ -1,5 +1,28 @@
+/* Color Scheme:
+
+--french-gray: #bfbdc1ff;
+--dim-gray: #6d6a75ff;
+--raisin-black: #37323eff;
+--gold-metallic: #deb841ff;
+--hunyadi-yellow: #de9e36ff;
+
+ */
+
+
 body {
     display: flex;
+    flex-direction: column;
+    font-family: 'Roboto Mono', serif;
     justify-content: center;
     align-items: center;
+    background-color: #bfbdc1ff;
+}
+
+.calculator {
+    padding: 20px;
+    background-color: #6d6a75ff;
+    border: #37323eff 5px solid;
+    border-radius: 20px;
+    width: 432px;
+    height: 632px;
 }
