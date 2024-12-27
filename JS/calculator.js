@@ -21,6 +21,23 @@ function divide(a, b) {
 const numbers = document.querySelector(".numbers");
 const displayP = document.querySelector(".display p");
 
+// Setting variables to check which symbols have been pressed
+const operators = "+-*/";
+
+let firstTime = true;
+
 numbers.addEventListener("click", (e) => {
+    // Before you add to the display, delete the placeholder
+    if (firstTime) {
+        displayP.textContent = "";
+        firstTime = false;
+    }
+
+    switch (e.target.textContent) {
+        case "+":
+            console.log("Hello + was pressed");
+            break;
+    }
+
     displayP.textContent += e.target.textContent;
 })
