@@ -43,9 +43,12 @@ const numbers = document.querySelector(".numbers");
 const displayP = document.querySelector(".display p");
 
 // Setting variables to check which symbols have been pressed
-const operators = ["*", "+", "-", "/", "AC", "="];
+const operators = ["*", "+", "-", "/"];
+const otherOperators = ["AC", "="];
 
 let firstTime = true;
+let firstOperand = undefined;
+let secondOperand = 0;
 
 numbers.addEventListener("click", (e) => {
 
@@ -59,8 +62,16 @@ numbers.addEventListener("click", (e) => {
     }
 
     // Prevent any of the operators in the calculator to be shown on the display
+    // If any operator is pressed, change the colour to be clicked and create a variable for a number
     if (operators.includes(e.target.textContent)) {
-        console.log("Hello!");
+        // If the first number has never been used before, set it to whatever the user inputs first
+        if (typeof firstOperand === "undefined") {
+            firstOperand = parseInt(displayP.textContent);
+            console.log(`The value of firstOperand is ${firstOperand}, and it's type is: ${typeof firstOperand}`);
+        }
+    }
+    else if (otherOperators.includes(e.target.textContent)) {
+        console.log(`You pressed ${e.target.textContent}`);
     }
     else {
         // Before you add to the display, delete the placeholder
