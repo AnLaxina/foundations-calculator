@@ -43,16 +43,11 @@ const numbers = document.querySelector(".numbers");
 const displayP = document.querySelector(".display p");
 
 // Setting variables to check which symbols have been pressed
-const operators = "+-*/";
+const operators = ["*", "+", "-", "/", "AC", "="];
 
 let firstTime = true;
 
 numbers.addEventListener("click", (e) => {
-    // Before you add to the display, delete the placeholder
-    if (firstTime) {
-        displayP.textContent = "";
-        firstTime = false;
-    }
 
     switch (e.target.textContent) {
         case "+":
@@ -63,5 +58,17 @@ numbers.addEventListener("click", (e) => {
             break;
     }
 
-    displayP.textContent += e.target.textContent;
+    // Prevent any of the operators in the calculator to be shown on the display
+    if (operators.includes(e.target.textContent)) {
+        console.log("Hello!");
+    }
+    else {
+        // Before you add to the display, delete the placeholder
+        if (firstTime) {
+            displayP.textContent = "";
+            firstTime = false;
+        }
+        displayP.textContent += e.target.textContent;
+    }
+
 })
