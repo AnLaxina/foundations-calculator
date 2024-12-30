@@ -31,11 +31,10 @@ function operate(a, b, operator) {
             answer = multiply(a, b);
             break;
         case "/":
-            answer = divide(a, b);
+            answer = divide(a, b).toFixed(2);
             break;
-
     }
-    return answer;
+    return parseFloat(answer);
 }
 
 function changeButtonHighlight(e) {
@@ -71,7 +70,7 @@ const otherOperators = ["AC", "="];
 let firstTime = true;
 let alreadyHighlighted = false;
 let firstOperand = undefined;
-let secondOperand = 0;
+let secondOperand = undefined;
 let answer = undefined;
 
 numbers.addEventListener("click", changeButtonHighlight);
@@ -80,29 +79,48 @@ numbers.addEventListener("click", (e) => {
     // Prevent any of the operators in the calculator to be shown on the display
     // If any operator is pressed, create a variable for a number
     if (operators.includes(e.target.textContent)) {
-        // If the first number has never been used before, set it to whatever the user inputs first
-        if (typeof firstOperand === "undefined") {
+        // If the first operand has never been used before, set it to the current number
+        if (firstOperand === undefined) {
             firstOperand = parseInt(displayP.textContent);
-            console.log(`The value of firstOperand is ${firstOperand}, and it's type is: ${typeof firstOperand}`);
-            displayP.textContent = 0;
         }
-        answer = operate(parseInt(firstOperand), parseInt(secondOperand), e.target.textContent);
+        else if (secondOperand !== undefined) {
+            // Calculate the result of the previous operation
+            answer = operate(firstOperand, secondOperand, currentOperator);
+            // Store the result as the firstOperand for the next operation
+            firstOperand = answer;
+            // Reset the secondOperand
+            secondOperand = undefined;
+        }
+
+        // Store the current operator
+        currentOperator = e.target.textContent;
+        // Clear the display for the second operand
+        displayP.textContent = 0;
 
     }
     else if (otherOperators.includes(e.target.textContent)) {
-        evaluate(e.target.textContent);
+        // Handle the "=" operator
+        if (e.target.textContent === "=") {
+            // Only calculate if we have both operands
+            if (firstOperand !== undefined && secondOperand !== undefined) {
+                answer = operate(firstOperand, secondOperand, currentOperator);
+                displayP.textContent = answer;
+                firstOperand = undefined; // Reset after calculating
+                secondOperand = undefined;
+            }
+        }
     }
     else {
-        // Before you add to the display, delete the placeholder
+        // Handle number input
         if (firstTime) {
             displayP.textContent = "";
             firstTime = false;
         }
-        else if (typeof firstOperand !== "undefined") {
+        else if (firstOperand !== undefined && secondOperand === undefined) {
             displayP.textContent = "";
         }
-        displayP.textContent += e.target.textContent;
-        secondOperand = displayP.textContent;
+        displayP.textContent += e.target.textContent; // Append the digit to the display
+        secondOperand = parseInt(displayP.textContent); // Update second operand
     }
 
-})
+});
