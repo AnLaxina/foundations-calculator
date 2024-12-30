@@ -50,14 +50,6 @@ function changeButtonHighlight(e) {
     }
 }
 
-function evaluate(e) {
-    switch (e) {
-        case "=":
-            displayP.textContent = answer;
-            break;
-    }
-}
-
 // Handle button press for each button and change the display accordingly
 const numbers = document.querySelector(".numbers");
 const displayP = document.querySelector(".display p");
@@ -71,7 +63,7 @@ let firstTime = true;
 let alreadyHighlighted = false;
 let firstOperand = undefined;
 let secondOperand = undefined;
-let answer = undefined;
+let answer = 0;
 
 numbers.addEventListener("click", changeButtonHighlight);
 
@@ -95,7 +87,9 @@ numbers.addEventListener("click", (e) => {
         // Store the current operator
         currentOperator = e.target.textContent;
         // Clear the display for the second operand
-        displayP.textContent = 0;
+        console.log(`Second operand is ${secondOperand}`);
+        displayP.textContent = answer;
+
 
     }
     else if (otherOperators.includes(e.target.textContent)) {
@@ -119,6 +113,7 @@ numbers.addEventListener("click", (e) => {
         else if (firstOperand !== undefined && secondOperand === undefined) {
             displayP.textContent = "";
         }
+        console.log(`The first operand is: ${firstOperand}\nThe second operand is: ${secondOperand}`);
         displayP.textContent += e.target.textContent; // Append the digit to the display
         secondOperand = parseInt(displayP.textContent); // Update second operand
     }
