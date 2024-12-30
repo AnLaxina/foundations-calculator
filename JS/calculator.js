@@ -44,7 +44,9 @@ function changeButtonHighlight(e) {
         alreadyHighlighted = true;
     }
     else {
-        e.target.style.backgroundColor = "#de9e36ff";
+        operatorNodes.forEach((operator) => {
+            operator.style.backgroundColor = "#de9e36ff";
+        })
         alreadyHighlighted = false;
     }
 }
@@ -52,6 +54,7 @@ function changeButtonHighlight(e) {
 // Handle button press for each button and change the display accordingly
 const numbers = document.querySelector(".numbers");
 const displayP = document.querySelector(".display p");
+const operatorNodes = document.querySelectorAll(".operator");
 
 // Setting variables to check which symbols have been pressed
 const operators = ["*", "+", "-", "/"];
