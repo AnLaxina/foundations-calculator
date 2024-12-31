@@ -87,7 +87,6 @@ numbers.addEventListener("click", (e) => {
         // Store the current operator
         currentOperator = e.target.textContent;
         // Clear the display for the second operand
-        console.log(`Second operand is ${secondOperand}`);
         displayP.textContent = answer;
 
 
@@ -99,9 +98,15 @@ numbers.addEventListener("click", (e) => {
             if (firstOperand !== undefined && secondOperand !== undefined) {
                 answer = operate(firstOperand, secondOperand, currentOperator);
                 displayP.textContent = answer;
-                firstOperand = undefined; // Reset after calculating
+                firstOperand = undefined;
                 secondOperand = undefined;
             }
+        }
+        else if (e.target.textContent === "AC") {
+            displayP.textContent = 0;
+            firstOperand = undefined;
+            secondOperand = undefined;
+            answer = undefined;
         }
     }
     else {
