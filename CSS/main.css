@@ -1,0 +1,33 @@
+/* This is for global styles */
+body {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  font-family: "Roboto Mono", serif;
+  justify-content: center;
+  align-items: center;
+  background-color: #bfbdc1ff;
+}
+
+footer > h1 {
+  padding: 1rem;
+}
+
+main {
+  padding: 1.2rem;
+  flex-grow: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  font-family: "Roboto Mono", serif;
+  font-size: 32px;
+  height: 100%;
+  width: 25%;
+  border: 2px black solid;
+  border-bottom: 0px;
+  border-radius: 1px;
+  background-color: #de9e36ff;
+}
